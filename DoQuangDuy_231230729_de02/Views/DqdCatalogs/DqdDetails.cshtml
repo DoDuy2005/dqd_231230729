@@ -1,0 +1,56 @@
+﻿@model DoQuangDuy_231230729_de02.Models.DqdCatalog
+
+@{
+    Layout = "~/Views/Shared/_DqdLayout.cshtml";
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Thông tin chi tiết sản phẩm</h3>
+        </div>
+
+        <div class="card-body px-5 py-4">
+            <dl class="row">
+                <dt class="col-sm-3 fw-bold">Tên sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DqdCateName)</dd>
+
+                <dt class="col-sm-3 fw-bold">Giá bán:</dt>
+                <dd class="col-sm-9">@String.Format("{0:N0} đ", Model.DqdCatePrice)</dd>
+
+                <dt class="col-sm-3 fw-bold">Số lượng tồn:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DqdCateQty)</dd>
+
+                <dt class="col-sm-3 fw-bold">Hình ảnh:</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.DqdPicture))
+                    {
+                        <img src="~/images/@Model.DqdPicture" alt="Ảnh sản phẩm" class="img-thumbnail shadow-sm" width="150" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có ảnh</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3 fw-bold">Trạng thái:</dt>
+                <dd class="col-sm-9">
+                    @(Model.DqdCateActive ? "Active" : "Non-Active")
+                </dd>
+            </dl>
+
+            <div class="d-flex justify-content-between mt-4">
+                <!-- Sửa thành DqdIndex -->
+                <a asp-action="DqdIndex" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Quay lại danh sách
+                </a>
+
+                <!-- Sửa thành DqdEdit -->
+                <a asp-action="DqdEdit" asp-route-id="@Model.DqdId" class="btn btn-warning text-white">
+                    <i class="bi bi-pencil-square"></i> Chỉnh sửa
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

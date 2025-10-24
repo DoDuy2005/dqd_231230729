@@ -1,0 +1,78 @@
+﻿@model DoQuangDuy_231230729_de02.Models.DqdCatalog
+
+@{
+    Layout = "~/Views/Shared/_DqdLayout.cshtml";
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-warning text-white text-center">
+            <h3 class="mb-0">Chỉnh sửa thông tin sản phẩm</h3>
+        </div>
+
+        <div class="card-body px-5 py-4">
+            <!-- Sửa thành DqdEdit -->
+            <form asp-action="DqdEdit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="DqdId" />
+
+                <div class="mb-3">
+                    <label asp-for="DqdCateName" class="form-label fw-bold"></label>
+                    <input asp-for="DqdCateName" class="form-control" placeholder="Nhập tên sản phẩm..." />
+                    <span asp-validation-for="DqdCateName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DqdCatePrice" class="form-label fw-bold"></label>
+                    <input asp-for="DqdCatePrice" class="form-control" placeholder="Nhập giá sản phẩm..." />
+                    <span asp-validation-for="DqdCatePrice" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DqdCateQty" class="form-label fw-bold"></label>
+                    <input asp-for="DqdCateQty" class="form-control" placeholder="Nhập số lượng tồn..." />
+                    <span asp-validation-for="DqdCateQty" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DqdPicture" class="form-label fw-bold"></label>
+                    <input asp-for="DqdPicture" class="form-control" placeholder="Tên file ảnh (ví dụ: sp1.jpg)" />
+                    <span asp-validation-for="DqdPicture" class="text-danger"></span>
+
+                    @if (!string.IsNullOrEmpty(Model.DqdPicture))
+                    {
+                        <div class="mt-2">
+                            <img src="~/images/@Model.DqdPicture" alt="Ảnh hiện tại" class="img-thumbnail shadow-sm" width="150" />
+                        </div>
+                    }
+                </div>
+
+                <div class="form-check mb-4">
+                    <!-- Sửa checkbox -->
+                    <input class="form-check-input" asp-for="DqdCateActive" />
+                    <label class="form-check-label" asp-for="DqdCateActive">
+                        Active
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <!-- Sửa thành DqdIndex -->
+                    <a asp-action="DqdIndex" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại danh sách
+                    </a>
+
+                    <button type="submit" class="btn btn-warning text-white">
+                        <i class="bi bi-save"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

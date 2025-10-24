@@ -1,0 +1,64 @@
+﻿@model DoQuangDuy_231230729_de02.Models.DqdCatalog
+
+@{
+    Layout = "~/Views/Shared/_DqdLayout.cshtml";
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-danger text-white text-center">
+            <h3 class="mb-0">Xác nhận xóa sản phẩm</h3>
+        </div>
+
+        <div class="card-body px-5 py-4">
+            <div class="alert alert-warning text-center fw-bold">
+                Bạn có chắc chắn muốn xóa sản phẩm này không?
+            </div>
+
+            <dl class="row mt-4">
+                <dt class="col-sm-3 fw-bold">Tên sản phẩm:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DqdCateName)</dd>
+
+                <dt class="col-sm-3 fw-bold">Giá bán:</dt>
+                <dd class="col-sm-9">@String.Format("{0:N0} đ", Model.DqdCatePrice)</dd>
+
+                <dt class="col-sm-3 fw-bold">Số lượng:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.DqdCateQty)</dd>
+
+                <dt class="col-sm-3 fw-bold">Hình ảnh:</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.DqdPicture))
+                    {
+                        <img src="~/images/@Model.DqdPicture" alt="Ảnh sản phẩm" class="img-thumbnail" width="120" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có ảnh</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3 fw-bold">Trạng thái:</dt>
+                <dd class="col-sm-9">
+                    @(Model.DqdCateActive ? "Active" : "Non-Active")
+                </dd>
+            </dl>
+
+            <!-- Sửa thành DqdDelete -->
+            <form asp-action="DqdDelete" method="post" class="mt-4">
+                <input type="hidden" asp-for="DqdId" />
+
+                <div class="d-flex justify-content-between">
+                    <!-- Sửa thành DqdIndex -->
+                    <a asp-action="DqdIndex" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left-circle"></i> Quay lại danh sách
+                    </a>
+
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash3"></i> Xác nhận xóa
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

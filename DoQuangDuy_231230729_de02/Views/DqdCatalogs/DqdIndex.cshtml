@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DoQuangDuy_231230729_de02.Models.DqdCatalog>
+
+@{
+    Layout = "~/Views/Shared/_DqdLayout.cshtml";
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-primary">Danh sách Sản phẩm</h2>
+
+    <div class="text-end mb-3">
+        <a asp-action="DqdCreate" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Thêm mới
+        </a>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.DqdCateName)</th>
+                <th>@Html.DisplayNameFor(model => model.DqdCatePrice)</th>
+                <th>@Html.DisplayNameFor(model => model.DqdCateQty)</th>
+                <th>Thành tiền</th>
+                <th>@Html.DisplayNameFor(model => model.DqdPicture)</th>
+                <th>@Html.DisplayNameFor(model => model.DqdCateActive)</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DqdCateName</td>
+                    <td>@String.Format("{0:N0} đ", item.DqdCatePrice)</td>
+                    <td>@item.DqdCateQty</td>
+                    <td class="text-danger fw-bold">
+                        @String.Format("{0:N0} đ", item.DqdCatePrice * item.DqdCateQty)
+                    </td>
+                    <td>
+                        <img src="~/images/@item.DqdPicture" alt="@item.DqdCateName" width="80" height="80" class="rounded" />
+                    </td>
+                    <td>
+                        @(item.DqdCateActive ? "Active" : "Non-Active")
+                    </td>
+                    <td>
+                        <a asp-action="DqdEdit" asp-route-id="@item.DqdId" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a asp-action="DqdDetails" asp-route-id="@item.DqdId" class="btn btn-info btn-sm text-white">
+                            <i class="bi bi-eye"></i> Xem
+                        </a>
+                        <a asp-action="DqdDelete" asp-route-id="@item.DqdId" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
